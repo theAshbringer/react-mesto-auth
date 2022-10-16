@@ -12,6 +12,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import Login from "./Login";
 import Register from "./Register";
 import { Route, Routes } from "react-router";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -123,17 +124,22 @@ function App() {
         <Routes>
           <Route path='/sign-in' element={<Login />} />
           <Route path='/sign-up' element={<Register />} />
-          <Route path='/' element={
-            <Main
-              cards={cards}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleAvatarClick}
-              onCardClick={handleCardClick}
-              onCardLike={handleCardLike}
-              onCardDelete={handleCardDelete}
-            />}>
-          </Route>
+          <Route
+            path='/'
+            element={
+              <ProtectedRoute loggedIn={false}>
+                <Main
+                  cards={cards}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleAvatarClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
         <EditProfilePopup
