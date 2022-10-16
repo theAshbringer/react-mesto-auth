@@ -4,10 +4,11 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .form__title {
-  margin-bottom: 50px;
+  margin: 0 0 50px;
   align-self: center;
 }
 
@@ -32,4 +33,23 @@
 .form__registered {
   margin-bottom: 80px;
   width: 100%;
+}
+
+@media screen and (max-width: 751px) {
+  .form {
+    margin-top: 0;
+    padding: 0 30px;
+  }
+
+  .form__field:last-of-type {
+    margin-bottom: 173px;
+  }
+
+  .form__title {
+    margin: 0 0 40px;
+  }
+
+  .form__btn_type_register {
+    margin-bottom: 20px;
+  }
 }
