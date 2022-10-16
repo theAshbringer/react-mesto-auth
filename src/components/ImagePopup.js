@@ -3,7 +3,7 @@ import CloseButton from './CloseButton';
 import Popup from './Popup';
 
 function ImagePopup({ isOpen, card, onClose }) {
-  const className = `popup popup_type_img ${isOpen && 'popup_opened'}`;
+  const className = `popup_type_img ${isOpen && 'popup_opened'}`;
 
   return (
     <Popup className={className} onClose={onClose}>
