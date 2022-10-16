@@ -1,0 +1,35 @@
+.form {
+  margin-top: 20px;
+  max-width: 358px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__title {
+  margin-bottom: 50px;
+  align-self: center;
+}
+
+.form__field {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.form__field:last-of-type {
+  margin-bottom: 216px;
+}
+
+.form__btn {
+  margin-bottom: 112px;
+  width: 100%;
+}
+
+.form__btn_type_register {
+  margin-bottom: 15px;
+}
+
+.form__registered {
+  margin-bottom: 80px;
+  width: 100%;
+}
