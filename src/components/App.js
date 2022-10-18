@@ -13,6 +13,7 @@ import Login from "./Login";
 import Register from "./Register";
 import { Route, Routes } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
+import InfoTooltip from "./InfoTooltip/InfoTooltip";
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -120,28 +121,40 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
-        <Header />
         <Routes>
-          <Route path='/sign-in' element={<Login />} />
-          <Route path='/sign-up' element={<Register />} />
+          <Route path='/sign-in' element={
+            <>
+              <Header location='/sign-in' />
+              <Login />
+            </>
+          } />
+          <Route path='/sign-up' element={
+            <>
+              <Header location='/sign-up' />
+              <Register />
+            </>} />
           <Route
             path='/'
             element={
-              <ProtectedRoute loggedIn={false}>
-                <Main
-                  cards={cards}
-                  onEditProfile={handleEditProfileClick}
-                  onAddPlace={handleAddPlaceClick}
-                  onEditAvatar={handleAvatarClick}
-                  onCardClick={handleCardClick}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
-                />
+              <ProtectedRoute loggedIn={true}>
+                <>
+                  <Header location='/' />
+                  <Main
+                    cards={cards}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardLike={handleCardLike}
+                    onCardDelete={handleCardDelete}
+                  />
+                </>
               </ProtectedRoute>
             }
           />
         </Routes>
         <Footer />
+        <InfoTooltip successful={true} onClose={closeAllPopups} isOpen={false} />
         <EditProfilePopup
           isOpen={isEditProfileOpen}
           onClose={closeAllPopups}
