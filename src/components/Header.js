@@ -1,11 +1,17 @@
 import React from 'react'
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import './Header.css'
 
 const Header = ({ location }) => {
   const { email } = useContext(CurrentUserContext);
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    localStorage.removeItem('jwt');
+    navigate('/sign-in');
+  }
 
   return (
     <header className="header">
@@ -16,7 +22,9 @@ const Header = ({ location }) => {
         <>
           <div className="header__logged-in">
             <p className="header__user">{email}</p>
-            <Link className="header__logout" to={'/sign-in'}>Выйти</Link>
+            <button
+              onClick={onLogout}
+              className="header__logout" to={'/sign-in'}>Выйти</button>
           </div>
           <div className='header__burger'></div></>
       )}
