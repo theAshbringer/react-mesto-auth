@@ -1,12 +1,37 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 import FormInput from '../shared/FormInput/FormInput'
 import FormTitle from '../shared/FormTitle/FormTitle'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
 import TextButton from '../shared/TextButton/TextButton'
+import * as auth from '../utils/auth'
 
 const Register = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const initialState = { email: '', password: '', errorMessage: '' }
+  const [user, setUser] = useState(initialState);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    auth.register(user)
+      .then((res) => {
+        if (res) {
+          setUser(initialState);
+          navigate('/sign-in');
+        } else {
+          setUser({ ...user, errorMessage: 'Ошибка. Попробуйте еще раз' })
+        }
+      })
+  }
+
   return (
     <div className='form'>
       <FormTitle
@@ -14,23 +39,27 @@ const Register = () => {
         inverted={true}>
         Регистрация
       </FormTitle>
-      <form>
+      <form
+        onSubmit={handleSubmit}>
         <FormInput
           className='form__field'
           placeholder='Email'
           id='email'
-          value={email}
-          setValue={setEmail}
+          // type='email'
+          value={user.email}
+          setValue={handleChange}
           inverted={true}
         />
         <FormInput
           className='form__field'
           placeholder='Пароль'
-          id='login-password'
-          value={password}
-          setValue={setPassword}
+          id='password'
+          // type='password'
+          value={user.password}
+          setValue={handleChange}
           inverted={true}
         />
+        <p className='form_error'>{user.errorMessage}</p>
         <SubmitButton
           className='form__btn form__btn_type_register'
           inverted={true}

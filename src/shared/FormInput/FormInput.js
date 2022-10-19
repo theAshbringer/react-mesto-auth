@@ -21,7 +21,7 @@ const FormInput = (props) => {
   return (
     <input
       value={value ?? ''}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={setValue}
       type={type}
       name={id}
       id={id}

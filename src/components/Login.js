@@ -1,11 +1,36 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router'
 import FormInput from '../shared/FormInput/FormInput'
 import FormTitle from '../shared/FormTitle/FormTitle'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
+import * as auth from '../utils/auth'
 
-const Login = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+const Login = ({ handleLogin }) => {
+  const initialState = { email: '', password: '', errorMessage: '' }
+  const [user, setUser] = useState(initialState);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    auth.authorize(user)
+      .then((res) => {
+        if (res.token) {
+          handleLogin();
+          setUser(initialState);
+          navigate('/');
+        } else {
+          setUser({ ...user, errorMessage: 'Ошибка. Попробуйте еще раз' })
+        }
+      })
+  }
 
   return (
     <div className='form'>
@@ -14,14 +39,15 @@ const Login = () => {
         inverted={true}>
         Вход
       </FormTitle>
-      <form>
+      <form
+        onSubmit={handleSubmit}>
         <FormInput
           className='form__field'
           placeholder='Email'
           id='email'
           type='email'
-          value={email}
-          setValue={setEmail}
+          value={user.email}
+          setValue={handleChange}
           inverted={true}
         />
         <FormInput
@@ -29,13 +55,14 @@ const Login = () => {
           placeholder='Пароль'
           id='password'
           type='password'
-          value={password}
-          setValue={setPassword}
+          value={user.password}
+          setValue={handleChange}
           inverted={true}
         />
         <SubmitButton
           className='form__btn'
           inverted={true}
+          onClick={handleSubmit}
         >
           Войти
         </SubmitButton>

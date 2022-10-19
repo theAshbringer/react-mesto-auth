@@ -23,6 +23,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({})
   const [currentUser, setCurrentUser] = useState({})
   const [cards, setCards] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
@@ -108,6 +109,10 @@ function App() {
       })
   }
 
+  const handleLogin = () => {
+    setLoggedIn(true);
+  }
+
   useEffect(() => {
     api.loadUserInfo()
       .then((user) => {
@@ -125,7 +130,7 @@ function App() {
           <Route path='/sign-in' element={
             <>
               <Header location='/sign-in' />
-              <Login />
+              <Login handleLogin={handleLogin} />
             </>
           } />
           <Route path='/sign-up' element={
@@ -136,7 +141,7 @@ function App() {
           <Route
             path='/'
             element={
-              <ProtectedRoute loggedIn={true}>
+              <ProtectedRoute loggedIn={loggedIn}>
                 <>
                   <Header location='/' />
                   <Main
