@@ -11,9 +11,10 @@ import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import Login from "./Login";
 import Register from "./Register";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
 import InfoTooltip from "./InfoTooltip/InfoTooltip";
+import * as auth from '../utils/auth'
 
 function App() {
   const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
@@ -24,6 +25,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({})
   const [cards, setCards] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some(like => like._id === currentUser._id);
@@ -112,6 +115,24 @@ function App() {
   const handleLogin = () => {
     setLoggedIn(true);
   }
+
+  useEffect(() => {
+
+    const tokenCheck = () => {
+      const token = localStorage.getItem('jwt');
+      if (token) {
+        auth.getContent(token)
+          .then(({ data }) => {
+            if (data) {
+              setCurrentUser((prev) => ({ ...prev, email: data.email }));
+              setLoggedIn(true);
+              navigate('/');
+            }
+          })
+      }
+    }
+    tokenCheck();
+  }, [navigate])
 
   useEffect(() => {
     api.loadUserInfo()

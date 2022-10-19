@@ -44,3 +44,22 @@ export const authorize = ({ password, email }) => {
     })
     .catch((err) => console.log(err))
 }
+
+export const getContent = (token) => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `Bearer ${token}`,
+    },
+  })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      else
+        return Promise.reject(res);
+    })
+    .then((res) => res)
+    .catch((err) => console.log(err))
+}
