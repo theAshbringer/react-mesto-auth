@@ -45,9 +45,10 @@ const Login = ({ handleLogin }) => {
           className='form__field'
           placeholder='Email'
           id='email'
+          name='email'
           type='email'
           value={user.email}
-          setValue={handleChange}
+          onChange={handleChange}
           inverted={true}
         />
         <FormInput
@@ -55,8 +56,9 @@ const Login = ({ handleLogin }) => {
           placeholder='Пароль'
           id='password'
           type='password'
+          name='password'
           value={user.password}
-          setValue={handleChange}
+          onChange={handleChange}
           inverted={true}
         />
         <SubmitButton

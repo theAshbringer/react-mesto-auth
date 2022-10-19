@@ -45,18 +45,20 @@ const Register = () => {
           className='form__field'
           placeholder='Email'
           id='email'
-          // type='email'
+          name='email'
+          type='email'
           value={user.email}
-          setValue={handleChange}
+          onChange={handleChange}
           inverted={true}
         />
         <FormInput
           className='form__field'
           placeholder='Пароль'
           id='password'
-          // type='password'
+          name='password'
+          type='password'
           value={user.password}
-          setValue={handleChange}
+          onChange={handleChange}
           inverted={true}
         />
         <p className='form_error'>{user.errorMessage}</p>
