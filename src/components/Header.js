@@ -1,12 +1,13 @@
 import React from 'react'
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import './Header.css'
 
-const Header = ({ location }) => {
+const Header = () => {
   const { email } = useContext(CurrentUserContext);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const onLogout = () => {
     localStorage.removeItem('jwt');
@@ -16,9 +17,9 @@ const Header = ({ location }) => {
   return (
     <header className="header">
       <a href="#" className="header__logo" />
-      {location === '/sign-up' && <Link className="header__not-logged-in" to={'/sign-in'}>Войти</Link>}
-      {location === '/sign-in' && <Link className="header__not-logged-in" to={'/sign-up'}>Регистрация</Link>}
-      {location === '/' && (
+      {pathname === '/sign-up' && <Link className="header__not-logged-in" to={'/sign-in'}>Войти</Link>}
+      {pathname === '/sign-in' && <Link className="header__not-logged-in" to={'/sign-up'}>Регистрация</Link>}
+      {pathname === '/' && (
         <>
           <div className="header__logged-in">
             <p className="header__user">{email}</p>

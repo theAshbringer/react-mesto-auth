@@ -147,34 +147,27 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
+        <Header />
         <Routes>
           <Route path='/sign-in' element={
-            <>
-              <Header location='/sign-in' />
-              <Login handleLogin={handleLogin} />
-            </>
+            <Login handleLogin={handleLogin} />
           } />
           <Route path='/sign-up' element={
-            <>
-              <Header location='/sign-up' />
-              <Register />
-            </>} />
+            <Register />
+          } />
           <Route
             path='/'
             element={
               <ProtectedRoute loggedIn={loggedIn}>
-                <>
-                  <Header location='/' />
-                  <Main
-                    cards={cards}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardLike={handleCardLike}
-                    onCardDelete={handleCardDelete}
-                  />
-                </>
+                <Main
+                  cards={cards}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleAvatarClick}
+                  onCardClick={handleCardClick}
+                  onCardLike={handleCardLike}
+                  onCardDelete={handleCardDelete}
+                />
               </ProtectedRoute>
             }
           />
