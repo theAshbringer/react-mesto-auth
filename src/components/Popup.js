@@ -16,7 +16,7 @@ function Popup({ className, children, onClose }) {
 
   return (
     <div
-      className={className}
+      className={`popup ${className}`}
       onClick={onClose}
     >
       {children}

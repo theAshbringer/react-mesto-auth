@@ -3,7 +3,7 @@ import CloseButton from './CloseButton'
 import Popup from './Popup'
 
 function PopupWithForm({ children, name, title, isOpen, onClose, onSubmit }) {
-  const popupClass = `popup popup_type_${name} ${isOpen && 'popup_opened'}`
+  const popupClass = `popup_type_${name} ${isOpen && 'popup_opened'}`
 
   return (
     <Popup className={popupClass} onClose={onClose}>

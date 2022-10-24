@@ -1,6 +1,9 @@
 .page {
+  box-sizing: border-box;
   padding: 43px 27px 60px;
+  min-height: 100vh;
   display: grid;
+  grid-template-rows: min-content 1fr min-content;
   justify-items: center;
   font-family: Inter, Arial, sans-serif;
   font-weight: 400;
