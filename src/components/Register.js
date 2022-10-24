@@ -8,7 +8,7 @@ import * as auth from '../utils/auth'
 import InfoTooltip from './InfoTooltip/InfoTooltip'
 
 const Register = () => {
-  const initialState = { email: '', password: '', errorMessage: '' }
+  const initialState = { email: '', password: '' }
   const [user, setUser] = useState(initialState);
   const [tooltipState, setTooltipState] = useState({ isOpen: false, isSuccess: false });
   const navigate = useNavigate();
@@ -71,7 +71,6 @@ const Register = () => {
             onChange={handleChange}
             inverted={true}
           />
-          <p className='form_error'>{user.errorMessage}</p>
           <SubmitButton
             className='form__btn form__btn_type_register'
             inverted={true}

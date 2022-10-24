@@ -20,16 +20,18 @@ const Login = ({ handleLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    auth.authorize(user)
-      .then((res) => {
-        if (res.token) {
-          handleLogin();
-          setUser(initialState);
-          navigate('/');
-        } else {
-          setUser({ ...user, errorMessage: 'Ошибка. Попробуйте еще раз' })
-        }
-      })
+    if (user.email && user.password) {
+      auth.authorize(user)
+        .then((res) => {
+          if (res) {
+            handleLogin();
+            setUser(initialState);
+            navigate('/');
+          } else {
+            setUser({ ...user, errorMessage: 'Ошибка. Попробуйте еще раз' })
+          }
+        })
+    }
   }
 
   return (
@@ -61,10 +63,10 @@ const Login = ({ handleLogin }) => {
           onChange={handleChange}
           inverted={true}
         />
+        <p className='form_error'>{user.errorMessage}</p>
         <SubmitButton
           className='form__btn'
           inverted={true}
-          onClick={handleSubmit}
         >
           Войти
         </SubmitButton>
