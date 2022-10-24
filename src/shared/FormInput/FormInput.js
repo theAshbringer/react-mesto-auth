@@ -10,7 +10,12 @@ const FormInput = ({
   const inputClassName = `form-input ${inverted ? 'form-input_inverted' : ''} ${className}`;
 
   return (
-    <input className={inputClassName} {...props} />
+    <input
+      className={inputClassName}
+      minLength={2}
+      maxLength={40}
+      required={true}
+      {...props} />
   )
 }
 
