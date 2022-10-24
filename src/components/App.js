@@ -13,7 +13,6 @@ import Login from "./Login";
 import Register from "./Register";
 import { Route, Routes, useNavigate } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
-import InfoTooltip from "./InfoTooltip/InfoTooltip";
 import * as auth from '../utils/auth'
 
 function App() {
@@ -173,7 +172,6 @@ function App() {
           />
         </Routes>
         <Footer />
-        <InfoTooltip successful={true} onClose={closeAllPopups} isOpen={false} />
         <EditProfilePopup
           isOpen={popupState.editProfile}
           onClose={closeAllPopups}
