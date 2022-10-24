@@ -20,7 +20,7 @@
   background-image: url("../images/mesto-logo.svg");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }
 
 .header__not-logged-in {

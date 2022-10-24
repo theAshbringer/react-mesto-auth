@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
+import { Link } from 'react-router-dom'
 import FormInput from '../shared/FormInput/FormInput'
 import FormTitle from '../shared/FormTitle/FormTitle'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
-import TextButton from '../shared/TextButton/TextButton'
 import * as auth from '../utils/auth'
 
 const Register = () => {
@@ -69,11 +69,10 @@ const Register = () => {
           Зарегистрироваться
         </SubmitButton>
       </form>
-      <TextButton
-        fontSize={14}
+      <Link to='/sign-in'
         className='form__registered'
       >Уже зарегистрированы? Войти
-      </TextButton>
+      </Link>
     </div>
   )
 }
