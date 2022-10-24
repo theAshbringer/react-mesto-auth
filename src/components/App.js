@@ -17,10 +17,13 @@ import InfoTooltip from "./InfoTooltip/InfoTooltip";
 import * as auth from '../utils/auth'
 
 function App() {
-  const [isEditProfileOpen, setIsEditProfileOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
+  const initialPopupState = {
+    editProfile: false,
+    addPlace: false,
+    editAvatar: false,
+    imagePopup: false,
+  };
+  const [popupState, setPopupState] = useState(initialPopupState);
   const [selectedCard, setSelectedCard] = useState({})
   const [currentUser, setCurrentUser] = useState({})
   const [cards, setCards] = useState([]);
@@ -56,27 +59,24 @@ function App() {
   }, []);
 
   const handleAvatarClick = () => {
-    setIsEditAvatarPopupOpen(true);
+    setPopupState({ ...popupState, editAvatar: true });
   };
 
   const handleEditProfileClick = () => {
-    setIsEditProfileOpen(true);
+    setPopupState({ ...popupState, editProfile: true });
   };
 
   const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(true);
+    setPopupState({ ...popupState, addPlace: true });
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card)
-    setIsImagePopupOpen(true)
+    setPopupState({ ...popupState, imagePopup: true });
   };
 
   const closeAllPopups = () => {
-    setIsEditProfileOpen(false);
-    setIsAddPlacePopupOpen(false);
-    setIsEditAvatarPopupOpen(false);
-    setIsImagePopupOpen(false);
+    setPopupState(initialPopupState);
   };
 
   const handleUpdateUser = (user) => {
@@ -175,23 +175,23 @@ function App() {
         <Footer />
         <InfoTooltip successful={true} onClose={closeAllPopups} isOpen={false} />
         <EditProfilePopup
-          isOpen={isEditProfileOpen}
+          isOpen={popupState.editProfile}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
         <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
+          isOpen={popupState.addPlace}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlace}
         />
         <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
+          isOpen={popupState.editAvatar}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
         <PopupWithForm name="del" title="Вы уверены?" onClose={closeAllPopups}></PopupWithForm>
         <ImagePopup
-          isOpen={isImagePopupOpen}
+          isOpen={popupState.imagePopup}
           card={selectedCard}
           onClose={closeAllPopups}
         />
