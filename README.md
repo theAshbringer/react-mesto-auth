@@ -2,7 +2,7 @@
 
 Mesto is a photo sharing social network implemented as a single-page application. 
 
-The essential of this project is that it has been ported from vanilla JS version (check [this](https://github.com/theAshbringer/mesto) out) to React, although it doesn't introduce any new features.
+The essential of this project is that it has been ported from vanilla JS version (check [this](https://github.com/theAshbringer/mesto) out) to React.
 
 
 ## Technologies and tools 🛠️:
