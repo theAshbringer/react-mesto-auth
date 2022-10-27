@@ -81,7 +81,11 @@ function App() {
   const handleUpdateUser = (user) => {
     api.updateUserInfo(user)
       .then((newUser) => {
-        setCurrentUser(newUser)
+        setCurrentUser({
+          ...currentUser,
+          name: newUser.name,
+          about: newUser.about
+        })
         closeAllPopups();
       })
       .catch((err) => {
@@ -116,7 +120,6 @@ function App() {
   }
 
   useEffect(() => {
-
     const tokenCheck = () => {
       const token = localStorage.getItem('jwt');
       if (token) {
