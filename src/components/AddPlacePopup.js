@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
+import { useMemo } from 'react';
+import { useEffect } from 'react';
 import PopupWithForm from './PopupWithForm'
 
 const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
-  const initialValues = {
+  const initialValues = useMemo(() => ({
     name: '',
     link: '',
-  }
+  }), [])
 
   const [formValues, setFormValues] = useState(initialValues);
 
@@ -20,8 +22,11 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddPlace(formValues);
-    setFormValues(initialValues);
   }
+
+  useEffect(() => {
+    setFormValues(initialValues);
+  }, [isOpen, initialValues])
 
   return (
     <PopupWithForm
