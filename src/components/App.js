@@ -128,6 +128,7 @@ function App() {
               navigate('/');
             }
           })
+          .catch((err) => console.log(`Ошибка проверки токена: ${err}`))
       }
     }
     tokenCheck();

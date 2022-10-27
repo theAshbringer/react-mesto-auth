@@ -25,13 +25,11 @@ const Register = () => {
     e.preventDefault();
     auth.register(user)
       .then((res) => {
-        if (res) {
-          setTooltipState({ isOpen: true, isSuccess: true })
-          setUser(initialState);
-        } else {
-          setTooltipState({ isOpen: true, isSuccess: false })
-        }
+        setTooltipState({ isOpen: true, isSuccess: true })
+        setUser(initialState);
       })
+      .catch((err) =>
+        setTooltipState({ isOpen: true, isSuccess: false }))
   }
 
   const handleCloseTooltip = () => {

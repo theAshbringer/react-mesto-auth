@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router'
 import FormInput from '../shared/FormInput/FormInput'
 import FormTitle from '../shared/FormTitle/FormTitle'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
+import InfoTooltip from './InfoTooltip/InfoTooltip'
 import * as auth from '../utils/auth'
 
 const Login = ({ handleLogin }) => {
   const initialState = { email: '', password: '', errorMessage: '' }
   const [user, setUser] = useState(initialState);
+  const [tooltipState, setTooltipState] = useState({ isOpen: false, isSuccess: false });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -23,15 +25,22 @@ const Login = ({ handleLogin }) => {
     if (user.email && user.password) {
       auth.authorize(user)
         .then((res) => {
-          if (res) {
+          if (res.token) {
+            localStorage.setItem('jwt', res.token)
             handleLogin();
-            setUser(initialState);
             navigate('/');
+            setUser(initialState);
           } else {
-            setUser({ ...user, errorMessage: 'Ошибка. Попробуйте еще раз' })
+            return Promise.reject(res);
           }
         })
+        .catch((err) =>
+          setTooltipState({ isOpen: true, isSuccess: false }))
     }
+  }
+
+  const handleCloseTooltip = () => {
+    setTooltipState({ ...tooltipState, isOpen: false })
   }
 
   return (
@@ -63,7 +72,6 @@ const Login = ({ handleLogin }) => {
           onChange={handleChange}
           inverted={true}
         />
-        <p className='form_error'>{user.errorMessage}</p>
         <SubmitButton
           className='form__btn'
           inverted={true}
@@ -71,6 +79,7 @@ const Login = ({ handleLogin }) => {
           Войти
         </SubmitButton>
       </form>
+      <InfoTooltip successful={tooltipState.isSuccess} onClose={handleCloseTooltip} isOpen={tooltipState.isOpen} />
     </div>
   )
 }
