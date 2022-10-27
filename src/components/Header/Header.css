@@ -17,7 +17,7 @@
   display: block;
   width: 142px;
   height: 33px;
-  background-image: url("../images/mesto-logo.svg");
+  background-image: url("../../images/mesto-logo.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -50,7 +50,7 @@
   display: none;
   width: 24px;
   height: 21px;
-  background: url('../images/burger.svg');
+  background: url('../../images/burger.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

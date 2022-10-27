@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Footer from "./Footer";
-import Header from "./Header";
 import ImagePopup from "./ImagePopup";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
@@ -14,6 +13,7 @@ import Register from "./Register";
 import { Route, Routes, useNavigate } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
 import * as auth from '../utils/auth'
+import Header from "./Header/Header";
 
 function App() {
   const initialPopupState = {
