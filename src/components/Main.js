@@ -45,16 +45,15 @@ const Main = ({
       </section>
       <section>
         <ul className="cards">
-          {cards.map((card) => {
-            return (
-              <Card
-                card={card}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-                key={card._id}
-              />)
-          })}
+          {cards.map((card) => (
+            <Card
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+              key={card._id}
+            />)
+          )}
         </ul>
       </section>
     </main >
