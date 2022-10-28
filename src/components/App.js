@@ -148,7 +148,7 @@ function App() {
   }, [])
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, loggedIn, setLoggedIn }}>
       <div className="page">
         <Header />
         <Routes>

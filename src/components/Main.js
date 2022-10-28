@@ -11,7 +11,8 @@ const Main = ({
   onCardLike,
   onCardDelete
 }) => {
-  const { name, about: description, avatar } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
+  const { name, about: description, avatar } = currentUser;
 
   return (
     <main className="content">
