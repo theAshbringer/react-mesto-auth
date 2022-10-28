@@ -1,35 +1,42 @@
-import React from 'react'
-import { useContext } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react'
+import { useLocation } from 'react-router';
+import { Link } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUser from '../CurrentUser/CurrentUser'
 import './Header.css'
 
 const Header = () => {
-  const { email } = useContext(CurrentUserContext);
-  const navigate = useNavigate();
   const { pathname } = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { loggedIn } = useContext(CurrentUserContext);
 
-  const onLogout = () => {
-    localStorage.removeItem('jwt');
-    navigate('/sign-in');
-  }
+  const handleBurgerClick = () => {
+    setIsMenuOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (!loggedIn) {
+      setIsMenuOpen(false);
+    }
+  }, [loggedIn])
 
   return (
-    <header className="header">
-      <a href="#" className="header__logo" />
-      {pathname === '/sign-up' && <Link className="header__not-logged-in" to={'/sign-in'}>Войти</Link>}
-      {pathname === '/sign-in' && <Link className="header__not-logged-in" to={'/sign-up'}>Регистрация</Link>}
-      {pathname === '/' && (
-        <>
-          <div className="header__logged-in">
-            <p className="header__user">{email}</p>
-            <button
-              onClick={onLogout}
-              className="header__logout" to={'/sign-in'}>Выйти</button>
-          </div>
-          <div className='header__burger'></div></>
-      )}
-    </header>
+    <>
+      {isMenuOpen && <CurrentUser />}
+      <header className="header">
+        <a href="#" className="header__logo" />
+        {pathname === '/sign-up' && <Link className="header__not-logged-in" to={'/sign-in'}>Войти</Link>}
+        {pathname === '/sign-in' && <Link className="header__not-logged-in" to={'/sign-up'}>Регистрация</Link>}
+        {
+          pathname === '/' && (
+            <>
+              <button onClick={handleBurgerClick} className='header__burger' />
+              <CurrentUser className='header__current-user' />
+            </>
+          )
+        }
+      </header >
+    </>
   )
 }
 

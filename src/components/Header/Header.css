@@ -28,14 +28,7 @@
   color: inherit;
 }
 
-.header__logged-in {
-  display: flex;
-  gap: 24px;
-}
 
-.header__user {
-  margin: 0;
-}
 
 .header__logout {
   color: rgba(169, 169, 169, 1);
@@ -54,6 +47,8 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  border: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 751px) {
@@ -62,6 +57,7 @@
     padding: 0 30px 31.6px;
     font-size: 14px;
     line-height: 1.21;
+    padding-top: 27px;
   }
 
   .header__logo {
@@ -73,7 +69,7 @@
     margin-top: 7px;
   }
 
-  .header__logged-in {
+  .header__current-user {
     display: none;
   }
 
