@@ -10,7 +10,9 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const { loggedIn } = useContext(CurrentUserContext);
 
-  const handleBurgerClick = () => {
+  const burgerClassName = isMenuOpen ? 'header__burger header__burger_opened' : 'header__burger';
+
+  const handleBurgerClick = (e) => {
     setIsMenuOpen((prev) => !prev);
   };
 
@@ -30,7 +32,7 @@ const Header = () => {
         {
           pathname === '/' && (
             <>
-              <button onClick={handleBurgerClick} className='header__burger' />
+              <button onClick={handleBurgerClick} className={burgerClassName} />
               <CurrentUser className='header__current-user' />
             </>
           )

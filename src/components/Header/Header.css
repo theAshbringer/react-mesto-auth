@@ -28,8 +28,6 @@
   color: inherit;
 }
 
-
-
 .header__logout {
   color: rgba(169, 169, 169, 1);
   text-decoration: none;
@@ -43,12 +41,17 @@
   display: none;
   width: 24px;
   height: 21px;
-  background: url('../../images/burger.svg');
+  background-image: url('../../images/burger.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+.header__burger_opened {
+  background-image: url('../../images/close-btn.svg');
 }
 
 @media screen and (max-width: 751px) {
