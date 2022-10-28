@@ -1,5 +1,15 @@
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
+const handleResponse = (res) => {
+  if (res.ok) {
+    const json = res.json();
+    if (json) {
+      return json;
+    }
+  }
+  return Promise.reject(res);
+}
+
 export const register = ({ password, email }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
@@ -8,15 +18,7 @@ export const register = ({ password, email }) => {
     },
     body: JSON.stringify({ password, email })
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      else
-        return Promise.reject(res);
-    })
-    .then((res) => res)
-    .catch((err) => console.log(err))
+    .then((res) => handleResponse(res))
 }
 
 export const authorize = ({ password, email }) => {
@@ -27,22 +29,7 @@ export const authorize = ({ password, email }) => {
     },
     body: JSON.stringify({ password, email })
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      else
-        return Promise.reject(res);
-    })
-    .then((res) => {
-      if (res.token) {
-        localStorage.setItem('jwt', res.token)
-        return res;
-      } else {
-        return;
-      }
-    })
-    .catch((err) => console.log(err))
+    .then((res) => handleResponse(res))
 }
 
 export const getContent = (token) => {
@@ -53,13 +40,5 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`,
     },
   })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      else
-        return Promise.reject(res);
-    })
-    .then((res) => res)
-    .catch((err) => console.log(err))
+    .then((res) => handleResponse(res))
 }

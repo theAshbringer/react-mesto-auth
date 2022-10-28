@@ -42,11 +42,6 @@
   text-decoration: none;
   text-align: center;
 }
-
-.form_error {
-  color: red;
-}
-
 @media screen and (max-width: 751px) {
   .form {
     margin-top: 0;

@@ -17,7 +17,7 @@
   display: block;
   width: 142px;
   height: 33px;
-  background-image: url("../images/mesto-logo.svg");
+  background-image: url("../../images/mesto-logo.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -26,15 +26,6 @@
 .header__not-logged-in {
   text-decoration: none;
   color: inherit;
-}
-
-.header__logged-in {
-  display: flex;
-  gap: 24px;
-}
-
-.header__user {
-  margin: 0;
 }
 
 .header__logout {
@@ -50,10 +41,17 @@
   display: none;
   width: 24px;
   height: 21px;
-  background: url('../images/burger.svg');
+  background-image: url('../../images/burger.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.header__burger_opened {
+  background-image: url('../../images/close-btn.svg');
 }
 
 @media screen and (max-width: 751px) {
@@ -62,6 +60,7 @@
     padding: 0 30px 31.6px;
     font-size: 14px;
     line-height: 1.21;
+    padding-top: 27px;
   }
 
   .header__logo {
@@ -73,7 +72,7 @@
     margin-top: 7px;
   }
 
-  .header__logged-in {
+  .header__current-user {
     display: none;
   }
 
