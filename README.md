@@ -11,6 +11,7 @@ The essential of this project is that it has been ported from vanilla JS version
 
 ## Features 
 
+- Registration and authorization
 - 🤝 Responsive layout
 - :thumbsup: Valid semantic HTML
 - :ok_hand: OOP (ES6 classes)
@@ -22,8 +23,6 @@ The essential of this project is that it has been ported from vanilla JS version
 - :speech_balloon: App requests confirmation before delete
 - 🖼️ Cards open in popups
 - 🚪 Close card with Esc key, clicking overlay or close button
-- :white_check_mark: Dynamic form validation
-- Registration and authorization
 
 
 ## Get Started
