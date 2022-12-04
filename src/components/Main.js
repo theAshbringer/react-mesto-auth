@@ -11,7 +11,8 @@ const Main = ({
   onCardLike,
   onCardDelete
 }) => {
-  const { name, about: description, avatar } = useContext(CurrentUserContext);
+  const { currentUser } = useContext(CurrentUserContext);
+  const { name, about: description, avatar } = currentUser;
 
   return (
     <main className="content">
@@ -45,16 +46,15 @@ const Main = ({
       </section>
       <section>
         <ul className="cards">
-          {cards.map((card) => {
-            return (
-              <Card
-                card={card}
-                onCardClick={onCardClick}
-                onCardLike={onCardLike}
-                onCardDelete={onCardDelete}
-                key={card._id}
-              />)
-          })}
+          {cards.map((card) => (
+            <Card
+              card={card}
+              onCardClick={onCardClick}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
+              key={card._id}
+            />)
+          )}
         </ul>
       </section>
     </main >

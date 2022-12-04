@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Footer from "./Footer";
-import Header from "./Header";
 import ImagePopup from "./ImagePopup";
 import Main from "./Main";
 import PopupWithForm from "./PopupWithForm";
@@ -14,6 +13,7 @@ import Register from "./Register";
 import { Route, Routes, useNavigate } from "react-router";
 import ProtectedRoute from "./ProtectedRoute";
 import * as auth from '../utils/auth'
+import Header from "./Header/Header";
 
 function App() {
   const initialPopupState = {
@@ -81,7 +81,11 @@ function App() {
   const handleUpdateUser = (user) => {
     api.updateUserInfo(user)
       .then((newUser) => {
-        setCurrentUser(newUser)
+        setCurrentUser({
+          ...currentUser,
+          name: newUser.name,
+          about: newUser.about
+        })
         closeAllPopups();
       })
       .catch((err) => {
@@ -116,7 +120,6 @@ function App() {
   }
 
   useEffect(() => {
-
     const tokenCheck = () => {
       const token = localStorage.getItem('jwt');
       if (token) {
@@ -128,6 +131,7 @@ function App() {
               navigate('/');
             }
           })
+          .catch((err) => console.log(`Ошибка проверки токена: ${err}`))
       }
     }
     tokenCheck();
@@ -144,7 +148,7 @@ function App() {
   }, [])
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, loggedIn, setLoggedIn }}>
       <div className="page">
         <Header />
         <Routes>
