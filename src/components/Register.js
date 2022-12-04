@@ -10,7 +10,7 @@ import InfoTooltip from './InfoTooltip/InfoTooltip'
 const Register = () => {
   const initialState = { email: '', password: '' }
   const [user, setUser] = useState(initialState);
-  const [tooltipState, setTooltipState] = useState({ isOpen: false, isSuccess: false });
+  const [tooltipState, setTooltipState] = useState({ isOpen: false, isSuccess: false, errorMessage: '' });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,11 +25,10 @@ const Register = () => {
     e.preventDefault();
     auth.register(user)
       .then((res) => {
-        setTooltipState({ isOpen: true, isSuccess: true })
+        setTooltipState({ isOpen: true, isSuccess: true, errorMessage: '' })
         setUser(initialState);
       })
-      .catch((err) =>
-        setTooltipState({ isOpen: true, isSuccess: false }))
+      .catch((err) => setTooltipState({ isOpen: true, isSuccess: false, errorMessage: err }))
   }
 
   const handleCloseTooltip = () => {
@@ -81,7 +80,11 @@ const Register = () => {
         >Уже зарегистрированы? Войти
         </Link>
       </div>
-      <InfoTooltip successful={tooltipState.isSuccess} onClose={handleCloseTooltip} isOpen={tooltipState.isOpen} />
+      <InfoTooltip
+        successful={tooltipState.isSuccess}
+        onClose={handleCloseTooltip}
+        isOpen={tooltipState.isOpen}
+        errorMessage={tooltipState.errorMessage} />
     </>
   )
 }

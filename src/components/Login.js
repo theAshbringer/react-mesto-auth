@@ -9,7 +9,7 @@ import * as auth from '../utils/auth'
 const Login = ({ handleLogin }) => {
   const initialState = { email: '', password: '', errorMessage: '' }
   const [user, setUser] = useState(initialState);
-  const [tooltipState, setTooltipState] = useState({ isOpen: false, isSuccess: false });
+  const [tooltipState, setTooltipState] = useState({ isOpen: false, isSuccess: false, errorMessage: '' });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -25,17 +25,11 @@ const Login = ({ handleLogin }) => {
     if (user.email && user.password) {
       auth.authorize(user)
         .then((res) => {
-          if (res.token) {
-            localStorage.setItem('jwt', res.token)
-            handleLogin();
-            navigate('/');
-            setUser(initialState);
-          } else {
-            return Promise.reject(res);
-          }
+          handleLogin();
+          navigate('/');
+          setUser(initialState);
         })
-        .catch((err) =>
-          setTooltipState({ isOpen: true, isSuccess: false }))
+        .catch((err) => setTooltipState({ isOpen: true, isSuccess: false, errorMessage: err }))
     }
   }
 
@@ -79,7 +73,11 @@ const Login = ({ handleLogin }) => {
           Войти
         </SubmitButton>
       </form>
-      <InfoTooltip successful={tooltipState.isSuccess} onClose={handleCloseTooltip} isOpen={tooltipState.isOpen} />
+      <InfoTooltip
+        successful={tooltipState.isSuccess}
+        onClose={handleCloseTooltip}
+        isOpen={tooltipState.isOpen}
+        errorMessage={tooltipState.errorMessage} />
     </div>
   )
 }

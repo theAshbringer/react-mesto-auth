@@ -62,7 +62,7 @@ const cardOptions = {
 
 const authToken = 'b83e92bb-9e9d-4e00-bf65-d2bd8a4e2e78';
 
-const baseUrl = 'https://mesto.nomoreparties.co/v1/cohort-49/';
+const baseUrl = 'http://localhost:3000/';
 
 export {
   profileElement,

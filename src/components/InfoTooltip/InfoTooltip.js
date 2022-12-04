@@ -5,7 +5,7 @@ import { ReactComponent as FailLogo } from '../../images/fail.svg'
 import './InfoTooltip.css'
 import CloseButton from '../CloseButton'
 
-const InfoTooltip = ({ successful, isOpen, onClose }) => {
+const InfoTooltip = ({ successful, isOpen, onClose, errorMessage = 'Что-то пошло не так! Попробуйте ещё раз.' }) => {
   const popupClass = isOpen ? 'popup_opened' : '';
   return (
     <Popup className={popupClass} onClose={onClose}>
@@ -16,7 +16,7 @@ const InfoTooltip = ({ successful, isOpen, onClose }) => {
           {successful ?
             'Вы успешно зарегистрировались!'
             :
-            'Что-то пошло не так! Попробуйте ещё раз.'
+            errorMessage
           }
         </h2>
         <CloseButton onClose={onClose} />
