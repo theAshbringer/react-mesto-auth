@@ -19,8 +19,8 @@ class Api {
   updateAvatar(avatar) {
     return fetch(`${this._baseUrl}users/me/avatar`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
-        authorization: this._authToken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -32,42 +32,34 @@ class Api {
   changeLikeCardStatus(id, isLiked) {
     return fetch(`${this._baseUrl}cards/${id}/likes`, {
       method: isLiked ? 'DELETE' : 'PUT',
-      headers: {
-        authorization: this._authToken,
-      },
+      credentials: 'include',
     }).then((res) => this._handleResponse(res));
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}cards/${cardId}`, {
       method: 'DELETE',
-      headers: {
-        authorization: this._authToken,
-      },
+      credentials: 'include',
     }).then((res) => this._handleResponse(res));
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}cards`, {
-      headers: {
-        authorization: this._authToken,
-      },
+      credentials: 'include',
     }).then((res) => this._handleResponse(res));
   }
 
   loadUserInfo() {
     return fetch(`${this._baseUrl}users/me`, {
-      headers: {
-        authorization: this._authToken,
-      },
+      credentials: 'include',
     }).then((res) => this._handleResponse(res));
   }
 
   postCard(body) {
     return fetch(`${this._baseUrl}cards`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
-        authorization: this._authToken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
@@ -77,8 +69,8 @@ class Api {
   updateUserInfo({ name, description }) {
     return fetch(`${this._baseUrl}users/me`, {
       method: 'PATCH',
+      credentials: 'include',
       headers: {
-        authorization: this._authToken,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
