@@ -69,3 +69,15 @@ export const getContent = () => {
   })
     .then((res) => handleResponse(res))
 }
+
+export const logout = () => {
+  console.log('logout');
+  return fetch(`${BASE_URL}/logout`, {
+    credentials: 'include',
+  })
+    .then((res) => {
+      if (res.status !== 204) {
+        return Promise.reject('Что-то пошло не так')
+      }
+    })
+}

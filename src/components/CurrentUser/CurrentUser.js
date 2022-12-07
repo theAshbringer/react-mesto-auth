@@ -2,18 +2,22 @@ import React from 'react'
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { logout } from '../../utils/auth';
 import './CurrentUser.css'
 
-const CurrentUser = ({ isClosed, className = '' }) => {
+const CurrentUser = ({ className = '' }) => {
   const { currentUser: { email }, setLoggedIn } = useContext(CurrentUserContext);
   const navigate = useNavigate();
 
   const classNames = `current-user ${className}`;
 
   const onLogout = () => {
-    localStorage.removeItem('jwt');
-    setLoggedIn(false);
-    navigate('/sign-in');
+    logout()
+      .then(() => {
+        setLoggedIn(false);
+        navigate('/sign-in');
+      })
+      .catch(() => console.log('Нельзя просто так взять и выйти'))
   }
   return (
     <div className={classNames}>

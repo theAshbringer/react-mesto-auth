@@ -118,12 +118,18 @@ function App() {
       })
       .catch((err) => {
         setLoggedIn(false)
-        console.log('Не удалось загрузить данные профиля: ', err);
       })
   }, [])
 
   useEffect(() => {
     if (loggedIn) {
+      api.loadUserInfo()
+        .then((user) => {
+          setCurrentUser(user)
+        })
+        .catch((err) => {
+          console.log('Не удалось инициализировать профиль: ', err);
+        })
       api.getInitialCards()
         .then((cards) => {
           setCards(cards);
