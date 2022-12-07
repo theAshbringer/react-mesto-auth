@@ -47,16 +47,6 @@ function App() {
       .catch(err => console.log('Не удалось удалить карточку'));
   }
 
-  useEffect(() => {
-    api.getInitialCards()
-      .then((cards) => {
-        setCards(cards);
-      })
-      .catch((err) => {
-        console.log('Не удалось инициализировать карточки: ', err);
-      });
-  }, []);
-
   const handleAvatarClick = () => {
     setPopupState({ ...popupState, editAvatar: true });
   };
@@ -120,32 +110,29 @@ function App() {
   }
 
   useEffect(() => {
-    const tokenCheck = () => {
-      const token = localStorage.getItem('jwt');
-      if (token) {
-        auth.getContent(token)
-          .then(({ data }) => {
-            if (data) {
-              setCurrentUser((prev) => ({ ...prev, email: data.email }));
-              setLoggedIn(true);
-              navigate('/');
-            }
-          })
-          .catch((err) => console.log(`Ошибка проверки токена: ${err}`))
-      }
-    }
-    tokenCheck();
-  }, [navigate])
-
-  useEffect(() => {
     api.loadUserInfo()
       .then((user) => {
+        setLoggedIn(true)
         setCurrentUser(user)
+        navigate('/');
       })
       .catch((err) => {
+        setLoggedIn(false)
         console.log('Не удалось загрузить данные профиля: ', err);
       })
   }, [])
+
+  useEffect(() => {
+    if (loggedIn) {
+      api.getInitialCards()
+        .then((cards) => {
+          setCards(cards);
+        })
+        .catch((err) => {
+          console.log('Не удалось инициализировать карточки: ', err);
+        });
+    }
+  }, [loggedIn])
 
   return (
     <CurrentUserContext.Provider value={{ currentUser, loggedIn, setLoggedIn }}>
