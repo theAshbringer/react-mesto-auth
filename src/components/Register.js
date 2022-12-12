@@ -28,7 +28,7 @@ const Register = () => {
         setTooltipState({ isOpen: true, isSuccess: true, errorMessage: '' })
         setUser(initialState);
       })
-      .catch((err) => setTooltipState({ isOpen: true, isSuccess: false, errorMessage: err }))
+      .catch((err) => setTooltipState({ isOpen: true, isSuccess: false, errorMessage: err.message }))
   }
 
   const handleCloseTooltip = () => {
