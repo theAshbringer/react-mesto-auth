@@ -1,3 +1,5 @@
+import { ErrorWithMsg } from "./customError";
+
 export const BASE_URL = 'http://localhost:3000';
 
 const handleResponse = (res) => {
@@ -23,12 +25,12 @@ export const register = ({ password, email }) => {
         return handleResponse(res)
       }
       if (res.status === 400) {
-        return Promise.reject('Ошибка валидации')
+        return Promise.reject(new ErrorWithMsg('Ошибка валидации'))
       }
       if (res.status === 409) {
-        return Promise.reject('Пользователь уже зарегистрирован')
+        return Promise.reject(new ErrorWithMsg('Пользователь уже зарегистрирован'))
       }
-      return Promise.reject('Что-то пошло не так')
+      return Promise.reject(new ErrorWithMsg('Что-то пошло не так'))
     })
 }
 
@@ -46,15 +48,12 @@ export const authorize = ({ password, email }) => {
         return handleResponse(res)
       }
       if (res.status === 400) {
-        return Promise.reject('Ошибка валидации')
+        return Promise.reject(new ErrorWithMsg('Ошибка валидации'))
       }
       if (res.status === 401) {
-        return Promise.reject('Неверный логин или пароль')
+        return Promise.reject(new ErrorWithMsg('Неверный логин или пароль'))
       }
-      if (res.status === 404) {
-        return Promise.reject('Пользователь не зарегистрирован')
-      }
-      return Promise.reject('Что-то пошло не так')
+      return Promise.reject(new ErrorWithMsg('Что-то пошло не так'))
     })
 }
 
@@ -77,7 +76,7 @@ export const logout = () => {
   })
     .then((res) => {
       if (res.status !== 204) {
-        return Promise.reject('Что-то пошло не так')
+        return Promise.reject(new ErrorWithMsg('Что-то пошло не так'))
       }
     })
 }

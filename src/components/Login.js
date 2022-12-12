@@ -29,7 +29,7 @@ const Login = ({ handleLogin }) => {
           navigate('/');
           setUser(initialState);
         })
-        .catch((err) => setTooltipState({ isOpen: true, isSuccess: false, errorMessage: err }))
+        .catch((err) => setTooltipState({ isOpen: true, isSuccess: false, errorMessage: err.message }))
     }
   }
 
