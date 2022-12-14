@@ -72,7 +72,6 @@ export {
   cardListSelector,
   cardTemplateSelector,
   initialCards,
-  authToken,
   baseUrl,
   validationOptions,
   profileOptions,

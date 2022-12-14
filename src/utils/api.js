@@ -1,12 +1,10 @@
 import {
-  authToken,
   baseUrl
 } from './constants'
 
 class Api {
-  constructor({ baseUrl, authToken }) {
+  constructor({ baseUrl }) {
     this._baseUrl = baseUrl;
-    this._authToken = authToken;
   }
 
   _handleResponse(res) {
@@ -81,6 +79,6 @@ class Api {
   }
 }
 
-const api = new Api({ baseUrl, authToken });
+const api = new Api({ baseUrl });
 
 export default api;
